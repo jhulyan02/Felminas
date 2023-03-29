@@ -1,6 +1,18 @@
-from djaport import forms
+from django import forms
 
 from django.forms import ModelForm, widgets
-from usuarios.models import Usuario
+from Usuario.models import Usuario
+
+class UsuarioForm(ModelForm):
+
+    class Meta:
+        model = Usuario
+        fields = "__all__"
+
+        widgets={
+            'fecha_nacimiento': widgets.DateInput(attrs={'type':'date'},format='%Y-%m-%d')
+        }
+
+
 
 

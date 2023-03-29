@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 # Create your models here.
-class Usarios(models.Model):
+class Usuario(models.Model):
     primer_nombre= models.CharField(max_length=30, verbose_name="Primer Nombre")
     segundo_nombre= models.CharField(max_length=30, verbose_name="Segundo Nombre")
 
@@ -28,3 +28,21 @@ class rol(models.TextField):
 Rol=models.CharField(max_length=3, choices=rol.choices, verbose_name="Rol")
 
 Correo=models.CharField(max_length=40, verbose_name="Correo")
+
+class Estado(models.TextChoices):
+    ACTIVO='1',_("Activo")
+    INACTIVO='2',_("Inactivo")
+    CONDICIONADO='3',_("Condicionado")
+estado=models.CharField(max_length=15, verbose_name="Estado")
+
+class Pago(models.Model):
+    class Rol_Nivel(models.TextChoices):
+        NIVELA='N1',_("nivel 1")
+        NIVELB='N2',_("nivel 2")
+        NIVELC='N3',_("nivel 3")
+        NIVELD='N4',_("nivel 4")
+        NIVELE='N5',_("nivel 5")
+
+rol_nivel=models.CharField(max_length=5, verbose_name="nivel de roles")
+fecha=models.DateField(verbose_name="Fecha", help_text="MM/DD/AAAA")
+
