@@ -8,32 +8,48 @@ class Usuario(models.Model):
     primer_apellido= models.CharField(max_length=30, verbose_name="Primer Apellido")
     segudno_apellido= models.CharField(max_length=30, verbose_name="Segundo Apellido")
 
-class Tipo_Documento(models.TextChoices):
+    class Tipo_Documento(models.TextChoices):
 
-    CEDULA='CC',_("Cedula")
-    TARJETA='TI',_("Tarjeta de Idetidad")
-    CEDULA_EXTRANJERIA='CE',_("Cédula de Extranjería")
+        CEDULA='CC',_("Cedula")
+        TARJETA='TI',_("Tarjeta de Idetidad")
+        CEDULA_EXTRANJERIA='CE',_("Cédula de Extranjería")
 
-tipo_documento= models.CharField(max_length=2, choices=Tipo_Documento.choices, verbose_name="Tipo de Documento")
-Documento= models.CharField(max_length=20, verbose_name="Documento")
+    tipo_documento= models.CharField(max_length=2, choices=Tipo_Documento.choices, verbose_name="Tipo de Documento")
+    documento= models.CharField(max_length=20, verbose_name="Documento")
 
-telefono_contacto=models.CharField(max_length=10, verbose_name="Telefono de contacto")
-telefono_personal=models.CharField(max_length=10, verbose_name="telefono personal") 
+    telefono_contacto=models.CharField(max_length=10, verbose_name="Telefono de contacto")
+    telefono_personal=models.CharField(max_length=10, verbose_name="telefono personal") 
 
-class rol(models.TextField):
-    EMPLEADO='E',_("Empleado")
-    PROVEEDOR='P',_("Proveedor")
-    CLIENTE='C',_("Cliente")
+    class Rol(models.TextChoices):
+        EMPLEADO='E',_("Empleado")
+        PROVEEDOR='P',_("Proveedor")
+        CLIENTE='C',_("Cliente")
     
-Rol=models.CharField(max_length=3, choices=rol.choices, verbose_name="Rol")
+    rol=models.CharField(max_length=1, choices=Rol.choices, verbose_name="Rol")
 
-Correo=models.CharField(max_length=40, verbose_name="Correo")
+    Correo=models.CharField(max_length=40, verbose_name="Correo")
 
-class Estado(models.TextChoices):
-    ACTIVO='1',_("Activo")
-    INACTIVO='2',_("Inactivo")
-    CONDICIONADO='3',_("Condicionado")
-estado=models.CharField(max_length=15, verbose_name="Estado")
+    class Estado(models.TextChoices):
+        ACTIVO='1',_("Activo")
+        INACTIVO='2',_("Inactivo")
+        CONDICIONADO='3',_("Condicionado")
+    estado=models.CharField(max_length=15, verbose_name="Estado")
+    
+    def clean(self):
+        self.primer_nombre= self.primer_nombre.title()
+        self.segundo_nombre= self.segundo_nombre.title()
+
+        self.primer_apellido= self.primer_apellido.title()
+        self.segundo_apellido= self.segundo_apellido.title()
+        self.correo_personal= self.correo_personal.lower()
+        self.correo_ins= self.correo_ins.lower()
+
+
+    def __str__(self):
+        return "%s %s"%(self.primer_nombre,self.primer_apellido)
+
+    class Meta:
+        verbose_name_plural = "Usuarios"
 
 class Pago(models.Model):
     class Rol_Nivel(models.TextChoices):

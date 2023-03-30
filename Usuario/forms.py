@@ -13,6 +13,10 @@ class UsuarioForm(ModelForm):
             'fecha_nacimiento': widgets.DateInput(attrs={'type':'date'},format='%Y-%m-%d')
         }
 
+class UsuarioUpdateForm(ModelForm):
 
-
+    class Meta:
+        model = Usuario
+        fields = "__all__"
+        exclude = ["documento","fecha_nacimiento"]
 

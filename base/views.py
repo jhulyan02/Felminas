@@ -1,4 +1,4 @@
-from django.shotcuts import redirect, render
+from django.shortcuts import redirect, render
 
 def principal(request):
     titulo="Inicio"
