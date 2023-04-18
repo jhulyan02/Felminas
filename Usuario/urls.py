@@ -1,10 +1,10 @@
 from django.urls import path
 
-from Usuario.views import usuarios_listar, usuarios_crear, usuarios_modificar, usuarios_eliminar
+from usuario.views import usuario_listar, usuario_crear, usuario_modificar, usuario_eliminar
 
 urlpatterns = [
-    path('usuarios/', usuarios_listar, name="usuarios"),
-    path('usuarios/crear/', usuarios_crear, name="usuarios-crear"),
-    path('usuarios/modificar/<int:pk>/', usuarios_modificar, name="usuarios-modiicar"),
-    path('usuarios/eliminar/<int:pk>/', usuarios_eliminar, name="usuarios-eliminar"),
+    path('usuario/', usuario_listar, name="usuario"),
+    path('usuario/crear/', usuario_crear, name="usuario-crear"),
+    path('usuario/modificar/<int:pk>/', usuario_modificar, name="usuario-modificar"),
+    path('usuario/eliminar/<int:pk>/', usuario_eliminar, name="usuario-eliminar"),
 ]

@@ -1,7 +1,6 @@
-from django import forms
 
 from django.forms import ModelForm, widgets
-from Usuario.models import Usuario
+from usuario.models import Usuario
 
 class UsuarioForm(ModelForm):
 

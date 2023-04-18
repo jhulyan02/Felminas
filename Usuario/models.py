@@ -6,7 +6,7 @@ class Usuario(models.Model):
     segundo_nombre= models.CharField(max_length=30, verbose_name="Segundo Nombre")
 
     primer_apellido= models.CharField(max_length=30, verbose_name="Primer Apellido")
-    segudno_apellido= models.CharField(max_length=30, verbose_name="Segundo Apellido")
+    segundo_apellido= models.CharField(max_length=30, verbose_name="Segundo Apellido")
 
     class Tipo_Documento(models.TextChoices):
 
@@ -27,13 +27,14 @@ class Usuario(models.Model):
     
     rol=models.CharField(max_length=1, choices=Rol.choices, verbose_name="Rol")
 
-    Correo=models.CharField(max_length=40, verbose_name="Correo")
+    correo=models.CharField(max_length=40, verbose_name="Correo")
 
     class Estado(models.TextChoices):
         ACTIVO='1',_("Activo")
-        INACTIVO='2',_("Inactivo")
-        CONDICIONADO='3',_("Condicionado")
-    estado=models.CharField(max_length=15, verbose_name="Estado")
+        INACTIVO='0',_("Inactivo")
+        CONDICIONADO='2',_("Condicionado")
+    estado=models.CharField(max_length=1,choices=Estado.choices,default=Estado.ACTIVO,verbose_name="Estado")
+        
     
     def clean(self):
         self.primer_nombre= self.primer_nombre.title()
@@ -41,8 +42,7 @@ class Usuario(models.Model):
 
         self.primer_apellido= self.primer_apellido.title()
         self.segundo_apellido= self.segundo_apellido.title()
-        self.correo_personal= self.correo_personal.lower()
-        self.correo_ins= self.correo_ins.lower()
+        self.correo= self.correo.lower()
 
 
     def __str__(self):
@@ -50,15 +50,4 @@ class Usuario(models.Model):
 
     class Meta:
         verbose_name_plural = "Usuarios"
-
-class Pago(models.Model):
-    class Rol_Nivel(models.TextChoices):
-        NIVELA='N1',_("nivel 1")
-        NIVELB='N2',_("nivel 2")
-        NIVELC='N3',_("nivel 3")
-        NIVELD='N4',_("nivel 4")
-        NIVELE='N5',_("nivel 5")
-
-rol_nivel=models.CharField(max_length=5, verbose_name="nivel de roles")
-fecha=models.DateField(verbose_name="Fecha", help_text="MM/DD/AAAA")
 
